@@ -46,6 +46,21 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
+     /* Lightbox popup window */
+    .lightbox {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
     .about {
       max-width: 800px;
       margin: 80px auto;
@@ -71,26 +86,31 @@
   <!-- Gallery -->
   <section class="gallery">
     <!-- Replace the image filenames with your own sample work; insert alt="Sample Work" on each line for the name of the pic -->
-    <img src="IMG_1215.jpg">
-    <img src="DSC04563.jpg">
-    <img src="DSC04286.jpg">
-    <img src="DSC04586.jpg">
-    <img src="DSC04098.jpg">
-    <img src="DSC03782.jpg">
-    <img src="DSC03156.jpg">
-    <img src="DSC04272.jpg">
-    <img src="DSC03809.jpg">
-    <img src="DSC03865.jpg">
-    <img src="DSC03859.jpg">
-    <img src="DSC03596.jpg">
-    <img src="IMG_1218.jpg">
-    <img src="DSC04476.jpg">
-    <img src="DSC03910.jpg">
-    <img src="DSC04497.jpg">
-    <img src="DSC03469.jpg">
-    <img src="IMG_1170.jpg">
+    <img src="IMG_1215.jpg" data-full="IMG_1215.jpg">
+    <img src="DSC04563.jpg" data-full="DSC04563.jpg">
+    <img src="DSC04286.jpg" data-full="DSC04286.jpg">
+    <img src="DSC04586.jpg" data-full="DSC04586.jpg">
+    <img src="DSC04098.jpg" data-full="DSC04098.jpg">
+    <img src="DSC03782.jpg" data-full="DSC03782.jpg">
+    <img src="DSC03156.jpg" data-full="DSC03156.jpg">
+    <img src="DSC04272.jpg" data-full="DSC04272.jpg">
+    <img src="DSC03809.jpg" data-full="DSC03809.jpg">
+    <img src="DSC03865.jpg" data-full="DSC03865.jpg">
+    <img src="DSC03859.jpg" data-full="DSC03859.jpg">
+    <img src="DSC03596.jpg" data-full="DSC03596.jpg">
+    <img src="IMG_1218.jpg" data-full="IMG_1218.jpg">
+    <img src="DSC04476.jpg" data-full="DSC04476.jpg">
+    <img src="DSC03910.jpg" data-full="DSC03910.jpg">
+    <img src="DSC04497.jpg" data-full="DSC04497.jpg">
+    <img src="DSC03469.jpg" data-full="DSC03469.jpg">
+    <img src="IMG_1170.jpg" data-full="IMG_1170.jpg">
 
   </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img src="" id="lightboxImg" alt="Full Size Photo">
+  </div>
 
   <!-- About / Contact -->
   <section class="about">
@@ -114,5 +134,24 @@
   <footer>
     © 2025 Bianca Basceanu. All rights reserved. Ask for permission to repost :)
   </footer>
+   <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const galleryImgs = document.querySelectorAll('.gallery img');
+
+    // show popup when clicking on a gallery image
+    galleryImgs.forEach(img => {
+      img.addEventListener('click', () => {
+        const full = img.getAttribute('data-full');
+        lightboxImg.src = full;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    // close popup when background clicked
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    });
 </body>
 </html>
