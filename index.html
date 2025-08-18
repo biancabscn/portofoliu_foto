@@ -150,10 +150,12 @@
     });
 
     // close popup when background clicked
-    lightbox.addEventListener('click', () => {
-      lightbox.style.display = 'none';
-      lightboxImg.src = '';
-    });
+     lightbox.addEventListener('click', (e) => {
+  if (e.target !== lightboxImg) { // only close if clicked outside the image
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  }
+});
    </script>
 </body>
 </html>
